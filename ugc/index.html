@@ -124,6 +124,19 @@
   .note:nth-child(3){background:var(--pink);transform:rotate(-1.5deg)}
   .note:nth-child(4){background:var(--blue);transform:rotate(2.5deg)}
 
+  /* ---------- Founder card ---------- */
+  .card{
+    position:relative;max-width:760px;margin:0 auto;background:var(--paper);padding:30px 30px 18px;
+    box-shadow:0 10px 22px rgba(0,0,0,.22);transform:rotate(.5deg);
+  }
+  .card .lead{color:var(--muted);max-width:60ch;margin-bottom:12px}
+  .card .lead strong{color:var(--ink);font-weight:600}
+  .row{display:grid;grid-template-columns:110px 1fr;gap:18px;padding:12px 0;border-top:1px solid var(--rule)}
+  .row .stat{font-family:"Caveat",cursive;font-size:28px;font-weight:700;line-height:1;color:var(--thread)}
+  .row h3{font-size:17px;font-weight:600;line-height:1.35}
+  .row h3 span{font-weight:400;color:var(--muted)}
+  .row p{color:var(--muted);margin-top:2px;font-size:15px}
+
   footer{text-align:center;padding:56px 20px 40px;font-family:"Caveat",cursive;font-size:24px;color:#3b2a1a}
   footer a{text-decoration:none}
   footer a:hover{text-decoration:underline}
@@ -136,6 +149,8 @@
     .reel{flex:0 0 72%;scroll-snap-align:center}
     .reel:nth-child(2){margin-top:0}
     .notes{grid-template-columns:1fr 1fr;gap:20px}
+    .card{padding:26px 18px 14px}
+    .row{grid-template-columns:1fr;gap:4px}
   }
 </style>
 </head>
@@ -204,6 +219,17 @@
       <p>A nine-second meme built for shares: the pain of writing an essay alone, punchline included.</p>
     </article>
   </div>
+
+  <h2 class="label" style="background:var(--mint)">I'm a founder too<small>So I know what early-stage teams need from content</small></h2>
+
+  <section class="card">
+    <i class="pin"></i>
+    <p class="lead">I run my own startup, <strong>Sunbeam Health</strong>, so I've been on your side of the brief. I know a startup needs content that explains the product in seconds, is cheap to test, and ships fast enough to keep up with a team that changes direction every week.</p>
+    <div class="row"><span class="stat">~2%</span><div><h3>Y Combinator AI Startup School <span>2026</span></h3><p>Selected from 30,000+ applicants in 120+ countries.</p></div></div>
+    <div class="row"><span class="stat">Top 50</span><div><h3>Harvard Health Systems Innovation Lab <span>Harvard T.H. Chan School of Public Health</span></h3><p>Sunbeam Health was picked from 14,000+ applicants, and was first in the Canada hub.</p></div></div>
+    <div class="row"><span class="stat">1st</span><div><h3>The Forge <span>McMaster's startup incubator</span></h3><p>1 of 20 teams funded, placed first overall.</p></div></div>
+    <div class="row"><span class="stat">Founder</span><div><h3>Sunbeam Health <span>Founder and CEO</span></h3><p>Helping doctors diagnose ADHD without years-long waitlists. <a class="link" style="display:inline;font-size:15px" href="https://sunbeam.health/" target="_blank" rel="noopener">sunbeam.health ↗</a></p></div></div>
+  </section>
 
   <h2 class="label">What you get<small>Ready to run as an ad or post organically</small></h2>
 
