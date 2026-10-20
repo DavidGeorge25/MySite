@@ -80,6 +80,7 @@
   .btn:hover{background:#000}
   .link{display:inline-flex;align-items:center;gap:6px;font-weight:600;text-decoration:none;font-size:15px}
   .link:hover{text-decoration:underline}
+  .socials{display:flex;flex-wrap:wrap;gap:10px 22px;margin-top:20px;padding-top:16px;border-top:1px solid var(--rule)}
 
   /* ---------- Section labels ---------- */
   .label{
@@ -116,26 +117,6 @@
   .note:nth-child(3){background:var(--pink);transform:rotate(-1.5deg)}
   .note:nth-child(4){background:var(--blue);transform:rotate(2.5deg)}
 
-  /* ---------- How it works ---------- */
-  .card{
-    position:relative;max-width:760px;margin:0 auto;background:var(--paper);padding:28px 30px 18px;
-    box-shadow:0 10px 22px rgba(0,0,0,.22);transform:rotate(.5deg);
-  }
-  .step{display:grid;grid-template-columns:44px 1fr;gap:14px;padding:12px 0;border-top:1px solid var(--rule)}
-  .step:first-of-type{border-top:0}
-  .step .n{font-family:"Caveat",cursive;font-size:30px;font-weight:700;line-height:1;color:var(--thread)}
-  .step h3{font-size:17px;font-weight:600;line-height:1.35}
-  .step p{color:var(--muted);margin-top:2px}
-
-  /* ---------- Contact ---------- */
-  .contact{
-    position:relative;max-width:560px;margin:0 auto;text-align:center;background:var(--paper);
-    padding:30px 28px 26px;box-shadow:0 10px 22px rgba(0,0,0,.24);transform:rotate(-.8deg);
-  }
-  .contact h2{font-family:"Caveat",cursive;font-size:44px;line-height:1}
-  .contact p{color:var(--muted);margin:8px auto 20px;max-width:40ch}
-  .contact .actions{justify-content:center}
-
   footer{text-align:center;padding:56px 20px 40px;font-family:"Caveat",cursive;font-size:24px;color:#3b2a1a}
   footer a{text-decoration:none}
   footer a:hover{text-decoration:underline}
@@ -148,7 +129,6 @@
     .reel{flex:0 0 72%;scroll-snap-align:center}
     .reel:nth-child(2){margin-top:0}
     .notes{grid-template-columns:1fr 1fr;gap:20px}
-    .card{padding:24px 18px 14px}
   }
 </style>
 </head>
@@ -164,8 +144,12 @@
     <p>I'm David, a UGC creator in Hamilton, Ontario. I make short vertical videos for brands that look and sound like they belong in the feed: honest, quick to the point, and built around one strong hook.</p>
     <div class="actions">
       <a class="btn" href="mailto:david_george25@outlook.com?subject=UGC%20collaboration"><svg class="i" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg>Work with me</a>
-      <a class="link" href="https://www.instagram.com/dgcreates20/" target="_blank" rel="noopener"><svg class="i" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><path d="M17.5 6.5v.01"/></svg>@dgcreates20</a>
     </div>
+    <nav class="socials" aria-label="Social media">
+      <a class="link" href="https://www.instagram.com/dgcreates20/" target="_blank" rel="noopener"><svg class="i" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><path d="M17.5 6.5v.01"/></svg>Instagram</a>
+      <a class="link" href="https://www.linkedin.com/in/david-george25/" target="_blank" rel="noopener"><svg class="i" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="3"/><path d="M8 10v7M8 7v.01M12 17v-4a2 2 0 0 1 4 0v4M12 10v7"/></svg>LinkedIn</a>
+      <a class="link" href="mailto:david_george25@outlook.com?subject=UGC%20collaboration"><svg class="i" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg>Email</a>
+    </nav>
   </section>
 
   <h2 class="label">Recent work<small>Made for Hedwig AI · tap a video for sound</small></h2>
@@ -174,7 +158,7 @@
     <article class="reel">
       <i class="pin"></i>
       <button class="player" type="button" aria-label="Play Hedwig vs. Jarvis with sound">
-        <video src="hedwig-vs-jarvis.mp4" poster="hedwig-vs-jarvis.jpg" muted loop playsinline preload="none"></video>
+        <video src="/ugc/hedwig-vs-jarvis.mp4" poster="/ugc/hedwig-vs-jarvis.jpg" muted loop playsinline preload="none"></video>
         <span class="hint">▶ Play</span>
       </button>
       <div class="tag"><span>Talking head · demo</span><a href="https://www.instagram.com/p/DesHZD2vVXX/" target="_blank" rel="noopener">Instagram ↗</a></div>
@@ -185,7 +169,7 @@
     <article class="reel">
       <i class="pin"></i>
       <button class="player" type="button" aria-label="Play Explain it like I'm 5 with sound">
-        <video src="hedwig-eli5.mp4" poster="hedwig-eli5.jpg" muted loop playsinline preload="none"></video>
+        <video src="/ugc/hedwig-eli5.mp4" poster="/ugc/hedwig-eli5.jpg" muted loop playsinline preload="none"></video>
         <span class="hint">▶ Play</span>
       </button>
       <div class="tag"><span>Skit · demo</span><a href="https://www.instagram.com/p/DedIRsZuvaR/" target="_blank" rel="noopener">Instagram ↗</a></div>
@@ -196,7 +180,7 @@
     <article class="reel">
       <i class="pin"></i>
       <button class="player" type="button" aria-label="Play Life before ChatGPT with sound">
-        <video src="hedwig-before-chatgpt.mp4" poster="hedwig-before-chatgpt.jpg" muted loop playsinline preload="none"></video>
+        <video src="/ugc/hedwig-before-chatgpt.mp4" poster="/ugc/hedwig-before-chatgpt.jpg" muted loop playsinline preload="none"></video>
         <span class="hint">▶ Play</span>
       </button>
       <div class="tag"><span>Meme · 9s</span><a href="https://www.instagram.com/p/DeSUXOhvLQ3/" target="_blank" rel="noopener">Instagram ↗</a></div>
@@ -211,30 +195,8 @@
     <div class="note"><i class="pin"></i><h3>Hook-first</h3>Every video opens on a hook, and I can deliver alternate hooks to test against each other.</div>
     <div class="note"><i class="pin"></i><h3>Demos &amp; reviews</h3>Walkthroughs, skits and honest first impressions, filmed in a real setting.</div>
     <div class="note"><i class="pin"></i><h3>Raw footage</h3>Clean b-roll and unedited takes on request, so your team can recut for any placement.</div>
-    <div class="note"><i class="pin"></i><h3>Fast turnaround</h3>Brief to first draft in days, with a round of revisions included.</div>
+    <div class="note"><i class="pin"></i><h3>Fast turnaround</h3>First draft within hours, a day at most, with a round of revisions included.</div>
   </div>
-
-  <h2 class="label">How it works</h2>
-
-  <section class="card">
-    <i class="pin"></i>
-    <div class="step"><span class="n">1</span><div><h3>Brief</h3><p>You send the product, the goal, and anything that must (or must not) be said.</p></div></div>
-    <div class="step"><span class="n">2</span><div><h3>Concept</h3><p>I come back with a hook and a short outline for you to sign off on.</p></div></div>
-    <div class="step"><span class="n">3</span><div><h3>Film &amp; edit</h3><p>Shot vertically, edited with captions so it works with the sound off.</p></div></div>
-    <div class="step"><span class="n">4</span><div><h3>Deliver</h3><p>Final files, plus any extra hooks or raw footage agreed in the brief.</p></div></div>
-  </section>
-
-  <h2 class="label" style="background:var(--mint)">Let's make something</h2>
-
-  <section class="contact">
-    <i class="pin"></i>
-    <h2>Send me your product</h2>
-    <p>Tell me what you want it to do and I'll reply with an idea.</p>
-    <div class="actions">
-      <a class="btn" href="mailto:david_george25@outlook.com?subject=UGC%20collaboration"><svg class="i" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg>david_george25@outlook.com</a>
-      <a class="link" href="https://www.instagram.com/dgcreates20/" target="_blank" rel="noopener">Instagram ↗</a>
-    </div>
-  </section>
 </main>
 
 <footer><a href="/">← back to the board</a></footer>
