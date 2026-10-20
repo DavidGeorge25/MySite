@@ -1,0 +1,6 @@
+{
+  "redirects": [
+    { "source": "/UGC", "destination": "/ugc", "permanent": true },
+    { "source": "/Ugc", "destination": "/ugc", "permanent": true }
+  ]
+}
