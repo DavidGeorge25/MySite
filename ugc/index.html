@@ -96,6 +96,13 @@
   .reel:nth-child(1){transform:rotate(-1.5deg)}
   .reel:nth-child(2){transform:rotate(1deg);margin-top:24px}
   .reel:nth-child(3){transform:rotate(-.5deg)}
+  .frame{position:relative}
+  .restart{
+    position:absolute;top:8px;right:8px;z-index:2;width:34px;height:34px;border:0;border-radius:50%;
+    display:grid;place-items:center;background:rgba(0,0,0,.62);color:#fff;cursor:pointer;
+  }
+  .restart:hover{background:rgba(0,0,0,.82)}
+  .restart svg.i{width:17px;height:17px}
   .player{position:relative;display:block;width:100%;aspect-ratio:9/16;border:0;padding:0;background:#222;cursor:pointer;overflow:hidden}
   .player video{display:block;width:100%;height:100%;object-fit:cover}
   .player .hint{
@@ -157,10 +164,13 @@
   <div class="reels">
     <article class="reel">
       <i class="pin"></i>
-      <button class="player" type="button" aria-label="Play Hedwig vs. Jarvis with sound">
-        <video src="/ugc/hedwig-vs-jarvis.mp4" poster="/ugc/hedwig-vs-jarvis.jpg" muted loop playsinline preload="none"></video>
-        <span class="hint">▶ Play</span>
-      </button>
+      <div class="frame">
+        <button class="player" type="button" aria-label="Play Hedwig vs. Jarvis with sound">
+          <video src="/ugc/hedwig-vs-jarvis.mp4" poster="/ugc/hedwig-vs-jarvis.jpg" muted loop playsinline preload="none"></video>
+          <span class="hint">▶ Play</span>
+        </button>
+        <button class="restart" type="button" aria-label="Restart Hedwig vs. Jarvis from the beginning" title="Restart"><svg class="i" viewBox="0 0 24 24"><path d="M3 12a9 9 0 1 0 3-6.7"/><path d="M3 4v5h5"/></svg></button>
+      </div>
       <div class="tag"><span>Talking head · demo</span><a href="https://www.instagram.com/p/DesHZD2vVXX/" target="_blank" rel="noopener">Instagram ↗</a></div>
       <h3>Hedwig vs. Jarvis</h3>
       <p>Opens on a hot take, then proves it with a screen-recorded demo of Hedwig working through a Canvas assignment.</p>
@@ -168,10 +178,13 @@
 
     <article class="reel">
       <i class="pin"></i>
-      <button class="player" type="button" aria-label="Play Explain it like I'm 5 with sound">
-        <video src="/ugc/hedwig-eli5.mp4" poster="/ugc/hedwig-eli5.jpg" muted loop playsinline preload="none"></video>
-        <span class="hint">▶ Play</span>
-      </button>
+      <div class="frame">
+        <button class="player" type="button" aria-label="Play Explain it like I'm 5 with sound">
+          <video src="/ugc/hedwig-eli5.mp4" poster="/ugc/hedwig-eli5.jpg" muted loop playsinline preload="none"></video>
+          <span class="hint">▶ Play</span>
+        </button>
+        <button class="restart" type="button" aria-label="Restart Explain it like I'm 5 from the beginning" title="Restart"><svg class="i" viewBox="0 0 24 24"><path d="M3 12a9 9 0 1 0 3-6.7"/><path d="M3 4v5h5"/></svg></button>
+      </div>
       <div class="tag"><span>Skit · demo</span><a href="https://www.instagram.com/p/DedIRsZuvaR/" target="_blank" rel="noopener">Instagram ↗</a></div>
       <h3>"Explain it like I'm 5"</h3>
       <p>A relatable study-desk skit that turns into the product: Hedwig breaking down a course reading in plain language.</p>
@@ -179,10 +192,13 @@
 
     <article class="reel">
       <i class="pin"></i>
-      <button class="player" type="button" aria-label="Play Life before ChatGPT with sound">
-        <video src="/ugc/hedwig-before-chatgpt.mp4" poster="/ugc/hedwig-before-chatgpt.jpg" muted loop playsinline preload="none"></video>
-        <span class="hint">▶ Play</span>
-      </button>
+      <div class="frame">
+        <button class="player" type="button" aria-label="Play Life before ChatGPT with sound">
+          <video src="/ugc/hedwig-before-chatgpt.mp4" poster="/ugc/hedwig-before-chatgpt.jpg" muted loop playsinline preload="none"></video>
+          <span class="hint">▶ Play</span>
+        </button>
+        <button class="restart" type="button" aria-label="Restart Life before ChatGPT from the beginning" title="Restart"><svg class="i" viewBox="0 0 24 24"><path d="M3 12a9 9 0 1 0 3-6.7"/><path d="M3 4v5h5"/></svg></button>
+      </div>
       <div class="tag"><span>Meme · 9s</span><a href="https://www.instagram.com/p/DeSUXOhvLQ3/" target="_blank" rel="noopener">Instagram ↗</a></div>
       <h3>Life "BC", before ChatGPT</h3>
       <p>A nine-second meme built for shares: the pain of writing an essay alone, punchline included.</p>
@@ -202,8 +218,9 @@
 <footer><a href="/">← back to the board</a></footer>
 
 <script>
-  // Reels play muted while on screen, like a feed. Tapping one turns its sound on and
-  // mutes the others; tapping again pauses. Reduced motion: nothing plays until tapped.
+  // Reels play muted while on screen, like a feed. Tapping one turns its sound on from
+  // the start and mutes the others; tapping again pauses. ↺ restarts with sound.
+  // Reduced motion: nothing plays until tapped.
   (function(){
     const players=[...document.querySelectorAll('.player')];
     const reduced=matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -211,15 +228,21 @@
       const v=p.querySelector('video');
       p.querySelector('.hint').textContent=v.paused?'▶ Play':v.muted?'♪ Tap for sound':'❚❚ Pause';
     };
+    const listen=(p,v,fromStart)=>{
+      players.forEach(o=>{if(o!==p)o.querySelector('video').muted=true});
+      if(fromStart) v.currentTime=0;
+      v.muted=false;v.play().catch(()=>{});
+    };
     players.forEach(p=>{
       const v=p.querySelector('video');
       ['play','pause','volumechange'].forEach(e=>v.addEventListener(e,()=>hint(p)));
+      // Turning the sound on starts from the top, so nobody hears it from halfway in.
       p.addEventListener('click',()=>{
-        if(v.paused||v.muted){
-          players.forEach(o=>{if(o!==p)o.querySelector('video').muted=true});
-          v.muted=false;v.play().catch(()=>{});
-        }else v.pause();
+        if(v.muted) listen(p,v,true);
+        else if(v.paused) listen(p,v,false);
+        else v.pause();
       });
+      p.parentElement.querySelector('.restart').addEventListener('click',()=>listen(p,v,true));
     });
     if(reduced||!('IntersectionObserver' in window)) return;
     const io=new IntersectionObserver(es=>es.forEach(e=>{
