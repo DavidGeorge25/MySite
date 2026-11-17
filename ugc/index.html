@@ -25,7 +25,7 @@
   *{box-sizing:border-box;margin:0;padding:0}
   body{
     font-family:"Familjen Grotesk",system-ui,sans-serif;
-    color:var(--ink);font-size:16px;line-height:1.55;
+    color:var(--ink);font-size:15px;line-height:1.5;
     background-color:var(--cork);
     background-image:
       radial-gradient(circle at 20% 30%, rgba(0,0,0,.07) 0 1px, transparent 1.5px),
@@ -34,162 +34,120 @@
       radial-gradient(circle at 85% 15%, rgba(0,0,0,.05) 0 1px, transparent 1.5px);
     background-size:9px 9px, 13px 13px, 17px 17px, 11px 11px;
     -webkit-font-smoothing:antialiased;
-    min-height:100vh;
+    min-height:100vh;overflow-x:clip;
   }
   a{color:inherit}
   a:focus-visible,button:focus-visible{outline:2px solid var(--ink);outline-offset:3px;border-radius:3px}
-  .hand{font-family:"Caveat",cursive}
+  svg.i{width:16px;height:16px;flex:none;stroke:currentColor;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
 
   .pin{
-    position:absolute;width:16px;height:16px;border-radius:50%;
+    position:absolute;width:15px;height:15px;border-radius:50%;
     background:radial-gradient(circle at 35% 30%,#ff7a6e,#b8322a 60%,#7d1d17);
     box-shadow:1px 3px 3px rgba(0,0,0,.35);z-index:3;
-    top:-6px;left:50%;margin-left:-8px;
+    top:-6px;left:50%;margin-left:-7px;
   }
+  .tape{position:absolute;width:86px;height:24px;background:rgba(255,246,200,.6);box-shadow:0 1px 2px rgba(0,0,0,.12);z-index:3}
+  .tape.tl{top:-11px;left:-26px;transform:rotate(-38deg)}
+  .tape.tr{top:-11px;right:-26px;transform:rotate(38deg)}
+  .tape.t{display:none;top:-12px;left:50%;margin-left:-43px;transform:rotate(-3deg)}
 
   /* ---------- Home tag ---------- */
   .home{
-    position:fixed;top:16px;left:16px;z-index:10;
+    position:fixed;top:14px;left:14px;z-index:10;
     display:inline-flex;align-items:center;gap:6px;
-    background:var(--paper);padding:8px 16px;text-decoration:none;
-    font-weight:600;font-size:15px;box-shadow:0 6px 12px rgba(0,0,0,.22);
+    background:var(--paper);padding:7px 14px;text-decoration:none;
+    font-weight:600;font-size:14px;box-shadow:0 6px 12px rgba(0,0,0,.22);
     transform:rotate(-2deg);transition:transform .15s ease;
   }
-  .home::before{
-    content:"";position:absolute;top:-8px;left:50%;margin-left:-22px;width:44px;height:16px;
-    background:rgba(255,255,255,.55);transform:rotate(-4deg);
-  }
+  .home::before{content:"";position:absolute;top:-8px;left:50%;margin-left:-22px;width:44px;height:16px;background:rgba(255,255,255,.55);transform:rotate(-4deg)}
   .home:hover{transform:rotate(0deg) translateY(-1px)}
-  svg.i{width:16px;height:16px;flex:none;stroke:currentColor;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
 
-  .wrap{max-width:980px;margin:0 auto;padding:96px 20px 40px}
+  /* ---------- Board ---------- */
+  .board{max-width:1120px;margin:0 auto;padding:60px 28px 44px;display:grid;grid-template-columns:400px minmax(0,1fr);gap:28px 44px;align-items:start}
+  .side{display:grid;gap:30px}
 
-  /* ---------- Intro sheet ---------- */
-  .sheet{
-    position:relative;max-width:640px;margin:0 auto;background:var(--paper);
-    padding:40px 40px 32px;box-shadow:0 10px 24px rgba(0,0,0,.28);transform:rotate(-.6deg);
-  }
-  .sheet .kicker{font-size:13px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--thread)}
-  .sheet h1{font-family:"Caveat",cursive;font-size:56px;line-height:.95;margin:8px 0 14px}
-  .sheet p{color:var(--muted);max-width:52ch}
-  .actions{display:flex;flex-wrap:wrap;align-items:center;gap:12px 20px;margin-top:22px}
-  .btn{
-    display:inline-flex;align-items:center;gap:8px;background:var(--ink);color:var(--paper);
-    padding:10px 18px;border-radius:999px;text-decoration:none;font-weight:600;font-size:15px;
-  }
+  /* ---------- Taped sheet ---------- */
+  .sheet{position:relative;background:var(--paper);padding:30px 28px 26px;box-shadow:0 10px 24px rgba(0,0,0,.26);transform:rotate(-.8deg)}
+  .kicker{font-size:12px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--thread)}
+  .sheet h1{font-family:"Caveat",cursive;font-size:44px;line-height:.95;margin:6px 0 10px}
+  .sheet .intro{color:var(--muted);font-size:14.5px}
+  .sheet .intro strong{color:var(--ink);font-weight:600}
+
+  .numbers{display:grid;grid-template-columns:1.25fr 1fr 1fr;gap:10px;margin:18px 0 6px;padding-top:14px;border-top:1px solid var(--rule)}
+  .num .big{font-family:"Caveat",cursive;font-size:40px;font-weight:700;line-height:.9;color:var(--thread);white-space:nowrap}
+  .num .big small{font-size:20px;margin-left:2px}
+  .num p{font-size:12px;line-height:1.3;color:var(--muted);margin-top:4px}
+  .num p strong{color:var(--ink);font-weight:600}
+
+  .chart{margin-top:10px}
+  .chart .ch{display:flex;justify-content:space-between;align-items:baseline;font-size:12px;color:var(--muted);margin-bottom:14px}
+  .chart .ch strong{color:var(--ink);font-weight:600}
+  .bars{position:relative;display:grid;grid-template-columns:repeat(10,1fr);gap:4px;align-items:end;height:84px;padding:14px 0 0 22px;border-bottom:1.5px solid var(--ink)}
+  .bars::before{content:"1K";position:absolute;left:0;right:0;bottom:var(--ref);border-top:1.5px dashed rgba(30,36,48,.45);font:600 10px/1 "Familjen Grotesk",system-ui,sans-serif;color:var(--muted);padding-top:3px;pointer-events:none}
+  .bar{position:relative;height:var(--h);background:var(--ink);border-radius:3px 3px 0 0;min-height:3px}
+  .bar:hover,.bar:focus-visible{background:var(--thread)}
+  .bar b{position:absolute;left:50%;bottom:100%;transform:translateX(-50%);margin-bottom:2px;padding:0 2px;background:var(--paper);font-size:9.5px;font-weight:600;color:var(--ink);white-space:nowrap}
+  .chart .ft{display:flex;justify-content:space-between;font-size:11px;color:var(--muted);margin-top:5px}
+
+  .actions{display:flex;flex-wrap:wrap;align-items:center;gap:10px 18px;margin-top:20px;padding-top:16px;border-top:1px solid var(--rule)}
+  .btn{display:inline-flex;align-items:center;gap:8px;background:var(--ink);color:var(--paper);padding:10px 18px;border-radius:999px;text-decoration:none;font-weight:600;font-size:14px}
   .btn:hover{background:#000}
-  .link{display:inline-flex;align-items:center;gap:6px;font-weight:600;text-decoration:none;font-size:15px}
+  .link{display:inline-flex;align-items:center;gap:6px;font-weight:600;text-decoration:none;font-size:14px}
   .link:hover{text-decoration:underline}
-  .socials{display:flex;flex-wrap:wrap;gap:10px 22px;margin-top:20px;padding-top:16px;border-top:1px solid var(--rule)}
 
-  /* ---------- Section labels ---------- */
-  .label{
-    display:block;width:max-content;margin:72px auto 32px;background:var(--yellow);
-    padding:6px 20px 4px;font-family:"Caveat",cursive;font-size:34px;font-weight:700;line-height:1.1;
-    box-shadow:0 6px 12px rgba(0,0,0,.2);transform:rotate(-1.5deg);position:relative;
-  }
-  .label small{display:block;font-family:"Familjen Grotesk",system-ui,sans-serif;font-size:13px;font-weight:500;color:var(--muted);text-align:center;margin-top:-2px;padding-bottom:4px}
+  /* ---------- Sticky notes ---------- */
+  .notes{display:grid;grid-template-columns:1fr 1fr;gap:22px;padding:0 6px}
+  .note{position:relative;padding:20px 16px 16px;box-shadow:0 8px 14px rgba(0,0,0,.22);font-size:13px;line-height:1.4}
+  .note h3{font-family:"Caveat",cursive;font-size:26px;font-weight:700;line-height:1;margin-bottom:8px}
+  .note ul{list-style:none}
+  .note li{padding:3px 0;border-top:1px dashed rgba(30,36,48,.18)}
+  .note li:first-child{border-top:0}
+  .note li strong{font-weight:600}
+  .note li span{color:var(--muted)}
+  .note a{font-weight:600;text-decoration:none}
+  .note a:hover{text-decoration:underline}
+  .note:nth-child(1){background:var(--mint);transform:rotate(-2deg)}
+  .note:nth-child(2){background:var(--yellow);transform:rotate(1.6deg)}
 
-  /* ---------- Videos ---------- */
-  .reels{display:grid;grid-template-columns:repeat(3,1fr);gap:36px 28px;align-items:start}
-  .reel{position:relative;background:var(--paper);padding:10px 10px 14px;box-shadow:0 10px 24px rgba(0,0,0,.28)}
-  .reel:nth-child(3n+1){transform:rotate(-1.5deg)}
-  .reel:nth-child(3n+2){transform:rotate(1deg);margin-top:24px}
-  .reel:nth-child(3n){transform:rotate(-.5deg)}
+  /* ---------- Reels ---------- */
+  .reels{display:grid;grid-template-columns:repeat(3,1fr);gap:26px 20px;padding-top:10px;max-width:620px;margin:0 auto}
+  .reel{position:relative;background:var(--paper);padding:8px 8px 10px;box-shadow:0 10px 24px rgba(0,0,0,.28)}
+  .reel:nth-child(1){transform:rotate(-1.6deg)}
+  .reel:nth-child(2){transform:rotate(1.2deg);margin-top:14px}
+  .reel:nth-child(3){transform:rotate(-.6deg)}
+  .reel:nth-child(4){transform:rotate(1deg)}
+  .reel:nth-child(5){transform:rotate(-1.3deg);margin-top:14px}
+  .reel:nth-child(6){transform:rotate(.8deg)}
   .frame{position:relative}
-  .restart{
-    position:absolute;top:8px;right:8px;z-index:2;width:34px;height:34px;border:0;border-radius:50%;
-    display:grid;place-items:center;background:rgba(0,0,0,.62);color:#fff;cursor:pointer;
-  }
+  .restart{position:absolute;top:6px;right:6px;z-index:2;width:30px;height:30px;border:0;border-radius:50%;display:grid;place-items:center;background:rgba(0,0,0,.62);color:#fff;cursor:pointer}
   .restart:hover{background:rgba(0,0,0,.82)}
-  .restart svg.i{width:17px;height:17px}
+  .restart svg.i{width:15px;height:15px}
   .player{position:relative;display:block;width:100%;aspect-ratio:9/16;border:0;padding:0;background:#222;cursor:pointer;overflow:hidden}
   .player video{display:block;width:100%;height:100%;object-fit:cover}
-  .player .hint{
-    position:absolute;right:8px;bottom:8px;background:rgba(0,0,0,.62);color:#fff;
-    font:600 12px/1 "Familjen Grotesk",system-ui,sans-serif;padding:7px 10px;border-radius:999px;
-  }
-  .reel .tag{display:flex;justify-content:space-between;gap:8px;margin-top:10px;font-size:12px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--thread)}
-  .reel .tag a{color:var(--muted);text-decoration:none}
+  .player .hint{position:absolute;right:6px;bottom:6px;background:rgba(0,0,0,.62);color:#fff;font:600 11px/1 "Familjen Grotesk",system-ui,sans-serif;padding:6px 9px;border-radius:999px}
+  .reel .tag{display:flex;justify-content:space-between;align-items:center;gap:6px;margin-top:8px;font-size:11px;font-weight:600;letter-spacing:.05em;text-transform:uppercase;color:var(--thread)}
+  .reel .tag a{color:var(--muted);text-decoration:none;white-space:nowrap}
   .reel .tag a:hover{text-decoration:underline}
-  .reel h3{font-family:"Caveat",cursive;font-size:30px;line-height:1;margin-top:4px}
-  .reel p{font-size:14px;color:var(--muted);margin-top:4px;line-height:1.45}
-  .reel .via{display:inline-block;margin-top:6px;font-size:13px;font-weight:600;color:var(--thread);text-decoration:none}
-  .reel .via:hover{text-decoration:underline}
+  .reel .tag .views{display:inline-flex;align-items:center;gap:4px;background:var(--yellow);color:var(--ink);padding:3px 7px;border-radius:999px;letter-spacing:.01em;text-transform:none;font-size:11.5px}
+  .reel .tag .views svg.i{width:12px;height:12px}
+  .reel h3{font-family:"Caveat",cursive;font-size:23px;line-height:1;margin-top:5px}
 
-  /* ---------- Numbers ---------- */
-  .stats{display:grid;grid-template-columns:1.3fr 1fr 1fr;gap:22px;align-items:stretch}
-  .stat{position:relative;background:var(--paper);padding:26px 22px 20px;box-shadow:0 10px 22px rgba(0,0,0,.24)}
-  .stat:nth-child(1){transform:rotate(-1deg)}
-  .stat:nth-child(2){transform:rotate(1.2deg)}
-  .stat:nth-child(3){transform:rotate(-.6deg)}
-  .stat .big{font-family:"Caveat",cursive;font-size:64px;font-weight:700;line-height:.9;color:var(--thread)}
-  .stat .big small{font-size:30px;margin-left:4px}
-  .stat h3{font-size:16px;font-weight:600;margin-top:10px;line-height:1.35}
-  .stat p{font-size:14px;color:var(--muted);margin-top:4px;line-height:1.45}
-  .stat .sub{display:flex;flex-wrap:wrap;gap:6px 14px;margin-top:10px;font-size:13px;font-weight:600;color:var(--ink)}
-  .stat .sub span::before{content:"";display:inline-block;width:6px;height:6px;border-radius:50%;background:var(--thread);margin:0 6px 2px 0}
-
-  .chart{position:relative;background:var(--paper);padding:26px 26px 22px;margin-top:30px;box-shadow:0 10px 22px rgba(0,0,0,.24);transform:rotate(.4deg)}
-  .chart header{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:baseline;gap:6px 16px;margin-bottom:18px}
-  .chart h3{font-family:"Caveat",cursive;font-size:30px;font-weight:700;line-height:1}
-  .chart header p{font-size:13px;color:var(--muted)}
-  .bars{position:relative;display:grid;grid-template-columns:repeat(10,1fr);gap:8px;align-items:end;height:170px;padding:22px 0 0 30px;border-bottom:1.5px solid var(--ink)}
-  .bars::before{content:"1K";position:absolute;left:0;right:0;bottom:var(--ref);border-top:1.5px dashed rgba(30,36,48,.45);font:600 11px/1 "Familjen Grotesk",system-ui,sans-serif;color:var(--muted);text-align:left;padding-top:3px;pointer-events:none}
-  .bar{position:relative;height:var(--h);background:var(--ink);border-radius:4px 4px 0 0;min-height:4px}
-  .bar:hover,.bar:focus-visible{background:var(--thread)}
-  .bar b{position:absolute;left:50%;bottom:100%;transform:translateX(-50%);margin-bottom:3px;padding:1px 3px;background:var(--paper);font-size:12px;font-weight:600;color:var(--ink);white-space:nowrap}
-  .bar .ep{position:absolute;left:50%;top:100%;transform:translateX(-50%);margin-top:6px;font-size:11px;color:var(--muted);white-space:nowrap}
-  .chart .foot{display:flex;flex-wrap:wrap;justify-content:space-between;gap:6px 16px;margin-top:30px;font-size:13px;color:var(--muted)}
-  .chart .foot strong{color:var(--ink);font-weight:600}
-
-  .reel .tag .views{display:inline-flex;align-items:center;gap:5px;background:var(--yellow);color:var(--ink);padding:3px 8px;border-radius:999px;letter-spacing:.02em;text-transform:none;font-size:12px}
-  .reel .tag .views svg.i{width:13px;height:13px}
-
-  /* ---------- What you get ---------- */
-  .notes{display:grid;grid-template-columns:repeat(4,1fr);gap:24px}
-  .note{position:relative;padding:22px 16px 16px;box-shadow:0 8px 14px rgba(0,0,0,.22);font-size:14px;line-height:1.45}
-  .note h3{font-family:"Caveat",cursive;font-size:27px;font-weight:700;line-height:1;margin-bottom:6px}
-  .note:nth-child(1){background:var(--yellow);transform:rotate(-3deg)}
-  .note:nth-child(2){background:var(--mint);transform:rotate(2deg)}
-  .note:nth-child(3){background:var(--pink);transform:rotate(-1.5deg)}
-  .note:nth-child(4){background:var(--blue);transform:rotate(2.5deg)}
-
-  /* ---------- Founder card ---------- */
-  .card{
-    position:relative;max-width:760px;margin:0 auto;background:var(--paper);padding:30px 30px 18px;
-    box-shadow:0 10px 22px rgba(0,0,0,.22);transform:rotate(.5deg);
+  @media (max-width:1000px){
+    .board{grid-template-columns:1fr;padding:72px 16px 36px;gap:30px}
+    .board>.side{order:2}
+    .reels{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;gap:20px;padding:14px 16px 18px;margin:0 -16px}
+    .reel{flex:0 0 min(62%,240px);scroll-snap-align:center}
+    .reel:nth-child(n){margin-top:0}
+    .tape.tl,.tape.tr{display:none}
+    .tape.t{display:block}
+    .sheet{padding:28px 20px 22px}
+    .sheet h1{font-size:40px}
+    .notes{grid-template-columns:1fr 1fr;gap:18px;padding:0 4px}
   }
-  .card .lead{color:var(--muted);max-width:60ch;margin-bottom:12px}
-  .card .lead strong{color:var(--ink);font-weight:600}
-  .row{display:grid;grid-template-columns:110px 1fr;gap:18px;padding:12px 0;border-top:1px solid var(--rule)}
-  .row .stat{font-family:"Caveat",cursive;font-size:28px;font-weight:700;line-height:1;color:var(--thread)}
-  .row h3{font-size:17px;font-weight:600;line-height:1.35}
-  .row h3 span{font-weight:400;color:var(--muted)}
-  .row p{color:var(--muted);margin-top:2px;font-size:15px}
-
-  footer{text-align:center;padding:56px 20px 40px;font-family:"Caveat",cursive;font-size:24px;color:#3b2a1a}
-  footer a{text-decoration:none}
-  footer a:hover{text-decoration:underline}
-
-  @media (max-width:820px){
-    .wrap{padding:84px 16px 32px}
-    .sheet{padding:32px 22px 26px}
-    .sheet h1{font-size:46px}
-    .reels{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;gap:22px;padding:16px 16px 20px;margin:0 -16px}
-    .reel{flex:0 0 72%;scroll-snap-align:center}
-    .reel:nth-child(3n+2){margin-top:0}
-    .label{max-width:calc(100% - 12px);text-align:center}
-    .stats{grid-template-columns:1fr;gap:18px}
-    .stat .big{font-size:56px}
-    .chart{padding:22px 14px 18px}
-    .bars{gap:5px;height:150px;padding-left:22px}
-    .bar b{font-size:10px}
-    .bar .ep{display:none}
-    .bar:nth-child(1) .ep,.bar:nth-child(10) .ep{display:block}
-    .notes{grid-template-columns:1fr 1fr;gap:20px}
-    .card{padding:26px 18px 14px}
-    .row{grid-template-columns:1fr;gap:4px}
+  @media (max-width:560px){
+    .notes{grid-template-columns:1fr}
+    .numbers{grid-template-columns:1.25fr 1fr 1fr;gap:8px}
+    .num .big{font-size:34px}
   }
 </style>
 </head>
@@ -197,166 +155,128 @@
 
 <a class="home" href="/"><svg class="i" viewBox="0 0 24 24"><path d="M3 11 12 4l9 7"/><path d="M5 10v10h14V10"/></svg>Home</a>
 
-<main class="wrap">
-  <section class="sheet">
-    <i class="pin"></i>
-    <span class="kicker">UGC portfolio</span>
-    <h1>Content that feels like a friend's recommendation.</h1>
-    <p>I'm David, a UGC creator in Hamilton, Ontario. I make short vertical videos for brands that look and sound like they belong in the feed: honest, quick to the point, and built around one strong hook. Most recently for FOMO: one meme hit <strong style="color:var(--ink);font-weight:600">45K views</strong> on a brand-new account, and every episode of the series behind it cleared 1K.</p>
-    <div class="actions">
-      <a class="btn" href="mailto:david_george25@outlook.com?subject=UGC%20collaboration"><svg class="i" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg>Work with me</a>
+<main class="board">
+  <div class="side">
+    <section class="sheet">
+      <i class="tape tl"></i><i class="tape tr"></i><i class="tape t"></i>
+      <span class="kicker">UGC portfolio · David George</span>
+      <h1>Content that feels like a friend's recommendation.</h1>
+      <p class="intro">Short vertical videos for brands that look like they belong in the feed: one strong hook, honest, quick. Filmed in Hamilton, Ontario. Latest run for <strong>FOMO</strong>, on a brand-new account:</p>
+
+      <div class="numbers">
+        <div class="num"><div class="big">45K <small>views</small></div><p><strong>"We trade memecoins"</strong> meme · 2.3K likes · 28 comments</p></div>
+        <div class="num"><div class="big">10<small>/10</small></div><p>episodes cleared <strong>1K views</strong></p></div>
+        <div class="num"><div class="big">~4K</div><p><strong>avg views</strong> per episode</p></div>
+      </div>
+
+      <div class="chart" aria-label="Views per episode of Trying to afford random things">
+        <div class="ch"><span><strong>Views per episode</strong> · "Trying to afford random things"</span></div>
+        <div class="bars" style="--ref:12.0%"><div class="bar" tabindex="0" style="--h:39.8%" title="Episode 1: 3,316 views" aria-label="Episode 1: 3,316 views"><b>3.3K</b></div><div class="bar" tabindex="0" style="--h:86.6%" title="Episode 2: 7,221 views" aria-label="Episode 2: 7,221 views"><b>7.2K</b></div><div class="bar" tabindex="0" style="--h:12.2%" title="Episode 3: 1,014 views" aria-label="Episode 3: 1,014 views"><b>1.0K</b></div><div class="bar" tabindex="0" style="--h:83.7%" title="Episode 4: 6,976 views" aria-label="Episode 4: 6,976 views"><b>7.0K</b></div><div class="bar" tabindex="0" style="--h:100.0%" title="Episode 5: 8,338 views" aria-label="Episode 5: 8,338 views"><b>8.3K</b></div><div class="bar" tabindex="0" style="--h:86.2%" title="Episode 6: 7,185 views" aria-label="Episode 6: 7,185 views"><b>7.2K</b></div><div class="bar" tabindex="0" style="--h:14.7%" title="Episode 7: 1,224 views" aria-label="Episode 7: 1,224 views"><b>1.2K</b></div><div class="bar" tabindex="0" style="--h:15.1%" title="Episode 8: 1,263 views" aria-label="Episode 8: 1,263 views"><b>1.3K</b></div><div class="bar" tabindex="0" style="--h:30.0%" title="Episode 9: 2,501 views" aria-label="Episode 9: 2,501 views"><b>2.5K</b></div><div class="bar" tabindex="0" style="--h:18.7%" title="Episode 10: 1,557 views" aria-label="Episode 10: 1,557 views"><b>1.6K</b></div></div>
+        <div class="ft"><span>Ep. 1 → 10</span><span>Total <strong style="color:var(--ink)">40,595</strong></span></div>
+      </div>
+
+      <div class="actions">
+        <a class="btn" href="mailto:david_george25@outlook.com?subject=UGC%20collaboration"><svg class="i" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg>Work with me</a>
+        <a class="link" href="https://www.instagram.com/dgcreates20/" target="_blank" rel="noopener"><svg class="i" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><path d="M17.5 6.5v.01"/></svg>Instagram</a>
+        <a class="link" href="https://www.linkedin.com/in/david-george25/" target="_blank" rel="noopener"><svg class="i" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="3"/><path d="M8 10v7M8 7v.01M12 17v-4a2 2 0 0 1 4 0v4M12 10v7"/></svg>LinkedIn</a>
+      </div>
+    </section>
+
+    <div class="notes">
+      <div class="note"><i class="pin"></i><h3>What you get</h3>
+        <ul>
+          <li><strong>Hook-first</strong> <span>· alt hooks to test</span></li>
+          <li><strong>Demos, skits, reviews</strong> <span>· real settings</span></li>
+          <li><strong>Raw footage</strong> <span>· on request</span></li>
+          <li><strong>Fast</strong> <span>· first cut in hours, revisions included</span></li>
+        </ul>
+      </div>
+      <div class="note"><i class="pin"></i><h3>I'm a founder too</h3>
+        <ul>
+          <li><strong><a href="https://sunbeam.health/" target="_blank" rel="noopener">Sunbeam Health ↗</a></strong> <span>· founder &amp; CEO</span></li>
+          <li><strong>YC AI Startup School</strong> <span>· ~2% of 30K+</span></li>
+          <li><strong>Harvard HSIL</strong> <span>· top 50 of 14K+</span></li>
+          <li><strong>The Forge</strong> <span>· 1st of 20 funded</span></li>
+        </ul>
+      </div>
     </div>
-    <nav class="socials" aria-label="Social media">
-      <a class="link" href="https://www.instagram.com/dgcreates20/" target="_blank" rel="noopener"><svg class="i" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><path d="M17.5 6.5v.01"/></svg>Instagram</a>
-      <a class="link" href="https://www.linkedin.com/in/david-george25/" target="_blank" rel="noopener"><svg class="i" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="3"/><path d="M8 10v7M8 7v.01M12 17v-4a2 2 0 0 1 4 0v4M12 10v7"/></svg>LinkedIn</a>
-      <a class="link" href="mailto:david_george25@outlook.com?subject=UGC%20collaboration"><svg class="i" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg>Email</a>
-    </nav>
-  </section>
-
-  <h2 class="label" style="background:var(--pink)">The numbers<small>For FOMO, on a brand-new account</small></h2>
-
-  <section class="stats">
-    <div class="stat">
-      <i class="pin"></i>
-      <div class="big">45K <small>views</small></div>
-      <h3>"We trade memecoins" meme</h3>
-      <p>An eight-second meme for FOMO that the algorithm picked up and ran with.</p>
-      <div class="sub"><span>2.3K likes</span><span>28 comments</span></div>
-    </div>
-    <div class="stat">
-      <i class="pin"></i>
-      <div class="big">10<small>/ 10</small></div>
-      <h3>episodes cleared 1K views</h3>
-      <p>Not one dud in the "Trying to afford random things" run. Consistency, not a lucky post.</p>
-    </div>
-    <div class="stat">
-      <i class="pin"></i>
-      <div class="big">~4K</div>
-      <h3>average views per episode</h3>
-      <p>Over 40K views across the series, on top of the viral meme.</p>
-    </div>
-  </section>
-
-  <section class="chart" aria-label="Views per episode of Trying to afford random things">
-    <i class="pin"></i>
-    <header><h3>Views per episode</h3><p>"Trying to afford random things" series · Instagram Reels</p></header>
-    <div class="bars" style="--ref:12.0%"><div class="bar" tabindex="0" style="--h:39.8%" title="Episode 1: 3,316 views" aria-label="Episode 1: 3,316 views"><b>3.3K</b><span class="ep">Ep. 1</span></div><div class="bar" tabindex="0" style="--h:86.6%" title="Episode 2: 7,221 views" aria-label="Episode 2: 7,221 views"><b>7.2K</b><span class="ep">2</span></div><div class="bar" tabindex="0" style="--h:12.2%" title="Episode 3: 1,014 views" aria-label="Episode 3: 1,014 views"><b>1.0K</b><span class="ep">3</span></div><div class="bar" tabindex="0" style="--h:83.7%" title="Episode 4: 6,976 views" aria-label="Episode 4: 6,976 views"><b>7.0K</b><span class="ep">4</span></div><div class="bar" tabindex="0" style="--h:100.0%" title="Episode 5: 8,338 views" aria-label="Episode 5: 8,338 views"><b>8.3K</b><span class="ep">5</span></div><div class="bar" tabindex="0" style="--h:86.2%" title="Episode 6: 7,185 views" aria-label="Episode 6: 7,185 views"><b>7.2K</b><span class="ep">6</span></div><div class="bar" tabindex="0" style="--h:14.7%" title="Episode 7: 1,224 views" aria-label="Episode 7: 1,224 views"><b>1.2K</b><span class="ep">7</span></div><div class="bar" tabindex="0" style="--h:15.1%" title="Episode 8: 1,263 views" aria-label="Episode 8: 1,263 views"><b>1.3K</b><span class="ep">8</span></div><div class="bar" tabindex="0" style="--h:30.0%" title="Episode 9: 2,501 views" aria-label="Episode 9: 2,501 views"><b>2.5K</b><span class="ep">9</span></div><div class="bar" tabindex="0" style="--h:18.7%" title="Episode 10: 1,557 views" aria-label="Episode 10: 1,557 views"><b>1.6K</b><span class="ep">Ep. 10</span></div></div>
-    <div class="foot"><span>Lowest episode: <strong>1,014</strong></span><span>Highest: <strong>8,338</strong></span><span>Total: <strong>40,595</strong></span></div>
-  </section>
-
-  <h2 class="label">Recent work<small>Made for FOMO and Hedwig AI · tap a video for sound</small></h2>
-
-  <div class="reels">
-    <article class="reel">
-      <i class="pin"></i>
-      <div class="frame">
-        <button class="player" type="button" aria-label="Play We trade memecoins with sound">
-          <video src="/ugc/fomo-memecoins-ult.mp4" poster="/ugc/fomo-memecoins-ult.jpg" muted loop playsinline preload="none"></video>
-          <span class="hint">▶ Play</span>
-        </button>
-        <button class="restart" type="button" aria-label="Restart We trade memecoins from the beginning" title="Restart"><svg class="i" viewBox="0 0 24 24"><path d="M3 12a9 9 0 1 0 3-6.7"/><path d="M3 4v5h5"/></svg></button>
-      </div>
-      <div class="tag"><span class="views"><svg class="i" viewBox="0 0 24 24"><path d="M2 12s3.5-6 10-6 10 6 10 6-3.5 6-10 6S2 12 2 12Z"/><circle cx="12" cy="12" r="3"/></svg>45K views</span><a href="https://www.instagram.com/p/De11RcLxH9-/" target="_blank" rel="noopener">Instagram ↗</a></div>
-      <h3>"We trade memecoins"</h3>
-      <p>An eight-second relatable meme, the kind of clip people send straight to the group chat. 45K views, 2.3K likes and 28 comments on a brand-new account.</p>
-      <a class="via" href="https://www.instagram.com/crypto.with.allen" target="_blank" rel="noopener">For FOMO · @crypto.with.allen ↗</a>
-    </article>
-
-    <article class="reel">
-      <i class="pin"></i>
-      <div class="frame">
-        <button class="player" type="button" aria-label="Play Trying to afford random things, day 1 with sound">
-          <video src="/ugc/fomo-day-1.mp4" poster="/ugc/fomo-day-1.jpg" muted loop playsinline preload="none"></video>
-          <span class="hint">▶ Play</span>
-        </button>
-        <button class="restart" type="button" aria-label="Restart Trying to afford random things, day 1 from the beginning" title="Restart"><svg class="i" viewBox="0 0 24 24"><path d="M3 12a9 9 0 1 0 3-6.7"/><path d="M3 4v5h5"/></svg></button>
-      </div>
-      <div class="tag"><span class="views"><svg class="i" viewBox="0 0 24 24"><path d="M2 12s3.5-6 10-6 10 6 10 6-3.5 6-10 6S2 12 2 12Z"/><circle cx="12" cy="12" r="3"/></svg>1K–8K per episode</span><a href="https://www.instagram.com/p/DfKnuNLRkev/" target="_blank" rel="noopener">Instagram ↗</a></div>
-      <h3>Trying to afford random things</h3>
-      <p>Day one of an episodic series: trading on FOMO to pay for something random, ending on a comment-for-the-app CTA. Ten episodes in, every one has cleared 1K views.</p>
-      <a class="via" href="https://www.instagram.com/crypto.with.allen" target="_blank" rel="noopener">For FOMO · @crypto.with.allen ↗</a>
-    </article>
-
-    <article class="reel">
-      <i class="pin"></i>
-      <div class="frame">
-        <button class="player" type="button" aria-label="Play An iPhone duo with sound">
-          <video src="/ugc/fomo-iphone-duo.mp4" poster="/ugc/fomo-iphone-duo.jpg" muted loop playsinline preload="none"></video>
-          <span class="hint">▶ Play</span>
-        </button>
-        <button class="restart" type="button" aria-label="Restart An iPhone duo from the beginning" title="Restart"><svg class="i" viewBox="0 0 24 24"><path d="M3 12a9 9 0 1 0 3-6.7"/><path d="M3 4v5h5"/></svg></button>
-      </div>
-      <div class="tag"><span>Series · day 12</span><a href="https://www.instagram.com/p/DfObjluxwod/" target="_blank" rel="noopener">Instagram ↗</a></div>
-      <h3>An iPhone duo?!</h3>
-      <p>A later episode of the same series. The payoff keeps viewers coming back, and the views hold steady episode after episode.</p>
-      <a class="via" href="https://www.instagram.com/crypto.with.allen" target="_blank" rel="noopener">For FOMO · @crypto.with.allen ↗</a>
-    </article>
-
-    <article class="reel">
-      <i class="pin"></i>
-      <div class="frame">
-        <button class="player" type="button" aria-label="Play Hedwig vs. Jarvis with sound">
-          <video src="/ugc/hedwig-vs-jarvis.mp4" poster="/ugc/hedwig-vs-jarvis.jpg" muted loop playsinline preload="none"></video>
-          <span class="hint">▶ Play</span>
-        </button>
-        <button class="restart" type="button" aria-label="Restart Hedwig vs. Jarvis from the beginning" title="Restart"><svg class="i" viewBox="0 0 24 24"><path d="M3 12a9 9 0 1 0 3-6.7"/><path d="M3 4v5h5"/></svg></button>
-      </div>
-      <div class="tag"><span>Talking head · demo</span><a href="https://www.instagram.com/p/DesHZD2vVXX/" target="_blank" rel="noopener">Instagram ↗</a></div>
-      <h3>Hedwig vs. Jarvis</h3>
-      <p>Opens on a hot take, then proves it with a screen-recorded demo of Hedwig working through a Canvas assignment.</p>
-    </article>
-
-    <article class="reel">
-      <i class="pin"></i>
-      <div class="frame">
-        <button class="player" type="button" aria-label="Play Explain it like I'm 5 with sound">
-          <video src="/ugc/hedwig-eli5.mp4" poster="/ugc/hedwig-eli5.jpg" muted loop playsinline preload="none"></video>
-          <span class="hint">▶ Play</span>
-        </button>
-        <button class="restart" type="button" aria-label="Restart Explain it like I'm 5 from the beginning" title="Restart"><svg class="i" viewBox="0 0 24 24"><path d="M3 12a9 9 0 1 0 3-6.7"/><path d="M3 4v5h5"/></svg></button>
-      </div>
-      <div class="tag"><span>Skit · demo</span><a href="https://www.instagram.com/p/DedIRsZuvaR/" target="_blank" rel="noopener">Instagram ↗</a></div>
-      <h3>"Explain it like I'm 5"</h3>
-      <p>A relatable study-desk skit that turns into the product: Hedwig breaking down a course reading in plain language.</p>
-    </article>
-
-    <article class="reel">
-      <i class="pin"></i>
-      <div class="frame">
-        <button class="player" type="button" aria-label="Play Life before ChatGPT with sound">
-          <video src="/ugc/hedwig-before-chatgpt.mp4" poster="/ugc/hedwig-before-chatgpt.jpg" muted loop playsinline preload="none"></video>
-          <span class="hint">▶ Play</span>
-        </button>
-        <button class="restart" type="button" aria-label="Restart Life before ChatGPT from the beginning" title="Restart"><svg class="i" viewBox="0 0 24 24"><path d="M3 12a9 9 0 1 0 3-6.7"/><path d="M3 4v5h5"/></svg></button>
-      </div>
-      <div class="tag"><span>Meme · 9s</span><a href="https://www.instagram.com/p/DeSUXOhvLQ3/" target="_blank" rel="noopener">Instagram ↗</a></div>
-      <h3>Life "BC", before ChatGPT</h3>
-      <p>A nine-second meme built for shares: the pain of writing an essay alone, punchline included.</p>
-    </article>
   </div>
 
-  <h2 class="label" style="background:var(--mint)">I'm a founder too<small>So I know what early-stage teams need from content</small></h2>
-
-  <section class="card">
-    <i class="pin"></i>
-    <p class="lead">I run my own startup, <strong>Sunbeam Health</strong>, so I've been on your side of the brief. I know a startup needs content that explains the product in seconds, is cheap to test, and ships fast enough to keep up with a team that changes direction every week.</p>
-    <div class="row"><span class="stat">~2%</span><div><h3>Y Combinator AI Startup School <span>2026</span></h3><p>Selected from 30,000+ applicants in 120+ countries.</p></div></div>
-    <div class="row"><span class="stat">Top 50</span><div><h3>Harvard Health Systems Innovation Lab <span>Harvard T.H. Chan School of Public Health</span></h3><p>Sunbeam Health was picked from 14,000+ applicants, and was first in the Canada hub.</p></div></div>
-    <div class="row"><span class="stat">1st</span><div><h3>The Forge <span>McMaster's startup incubator</span></h3><p>1 of 20 teams funded, placed first overall.</p></div></div>
-    <div class="row"><span class="stat">Founder</span><div><h3>Sunbeam Health <span>Founder and CEO</span></h3><p>Helping doctors diagnose ADHD without years-long waitlists. <a class="link" style="display:inline;font-size:15px" href="https://sunbeam.health/" target="_blank" rel="noopener">sunbeam.health ↗</a></p></div></div>
+  <section class="reels" aria-label="Recent work. Tap a video for sound">
+      <article class="reel">
+        <i class="pin"></i>
+        <div class="frame">
+          <button class="player" type="button" aria-label="Play We trade memecoins with sound">
+            <video src="/ugc/fomo-memecoins-ult.mp4" poster="/ugc/fomo-memecoins-ult.jpg" muted loop playsinline preload="none"></video>
+            <span class="hint">▶ Play</span>
+          </button>
+          <button class="restart" type="button" aria-label="Restart We trade memecoins from the beginning" title="Restart"><svg class="i" viewBox="0 0 24 24"><path d="M3 12a9 9 0 1 0 3-6.7"/><path d="M3 4v5h5"/></svg></button>
+        </div>
+        <div class="tag"><span class="views"><svg class="i" viewBox="0 0 24 24"><path d="M2 12s3.5-6 10-6 10 6 10 6-3.5 6-10 6S2 12 2 12Z"/><circle cx="12" cy="12" r="3"/></svg>45K views</span><a href="https://www.instagram.com/p/De11RcLxH9-/" target="_blank" rel="noopener">FOMO ↗</a></div>
+        <h3>"We trade memecoins"</h3>
+      </article>
+      <article class="reel">
+        <i class="pin"></i>
+        <div class="frame">
+          <button class="player" type="button" aria-label="Play Trying to afford random things, day 1 with sound">
+            <video src="/ugc/fomo-day-1.mp4" poster="/ugc/fomo-day-1.jpg" muted loop playsinline preload="none"></video>
+            <span class="hint">▶ Play</span>
+          </button>
+          <button class="restart" type="button" aria-label="Restart Trying to afford random things, day 1 from the beginning" title="Restart"><svg class="i" viewBox="0 0 24 24"><path d="M3 12a9 9 0 1 0 3-6.7"/><path d="M3 4v5h5"/></svg></button>
+        </div>
+        <div class="tag"><span class="views"><svg class="i" viewBox="0 0 24 24"><path d="M2 12s3.5-6 10-6 10 6 10 6-3.5 6-10 6S2 12 2 12Z"/><circle cx="12" cy="12" r="3"/></svg>1K–8K / ep</span><a href="https://www.instagram.com/p/DfKnuNLRkev/" target="_blank" rel="noopener">FOMO ↗</a></div>
+        <h3>Trying to afford random things</h3>
+      </article>
+      <article class="reel">
+        <i class="pin"></i>
+        <div class="frame">
+          <button class="player" type="button" aria-label="Play An iPhone duo with sound">
+            <video src="/ugc/fomo-iphone-duo.mp4" poster="/ugc/fomo-iphone-duo.jpg" muted loop playsinline preload="none"></video>
+            <span class="hint">▶ Play</span>
+          </button>
+          <button class="restart" type="button" aria-label="Restart An iPhone duo from the beginning" title="Restart"><svg class="i" viewBox="0 0 24 24"><path d="M3 12a9 9 0 1 0 3-6.7"/><path d="M3 4v5h5"/></svg></button>
+        </div>
+        <div class="tag"><span>Series · day 12</span><a href="https://www.instagram.com/p/DfObjluxwod/" target="_blank" rel="noopener">FOMO ↗</a></div>
+        <h3>An iPhone duo?!</h3>
+      </article>
+      <article class="reel">
+        <i class="pin"></i>
+        <div class="frame">
+          <button class="player" type="button" aria-label="Play Hedwig vs. Jarvis with sound">
+            <video src="/ugc/hedwig-vs-jarvis.mp4" poster="/ugc/hedwig-vs-jarvis.jpg" muted loop playsinline preload="none"></video>
+            <span class="hint">▶ Play</span>
+          </button>
+          <button class="restart" type="button" aria-label="Restart Hedwig vs. Jarvis from the beginning" title="Restart"><svg class="i" viewBox="0 0 24 24"><path d="M3 12a9 9 0 1 0 3-6.7"/><path d="M3 4v5h5"/></svg></button>
+        </div>
+        <div class="tag"><span>Demo</span><a href="https://www.instagram.com/p/DesHZD2vVXX/" target="_blank" rel="noopener">Hedwig AI ↗</a></div>
+        <h3>Hedwig vs. Jarvis</h3>
+      </article>
+      <article class="reel">
+        <i class="pin"></i>
+        <div class="frame">
+          <button class="player" type="button" aria-label="Play Explain it like I'm 5 with sound">
+            <video src="/ugc/hedwig-eli5.mp4" poster="/ugc/hedwig-eli5.jpg" muted loop playsinline preload="none"></video>
+            <span class="hint">▶ Play</span>
+          </button>
+          <button class="restart" type="button" aria-label="Restart Explain it like I'm 5 from the beginning" title="Restart"><svg class="i" viewBox="0 0 24 24"><path d="M3 12a9 9 0 1 0 3-6.7"/><path d="M3 4v5h5"/></svg></button>
+        </div>
+        <div class="tag"><span>Skit · demo</span><a href="https://www.instagram.com/p/DedIRsZuvaR/" target="_blank" rel="noopener">Hedwig AI ↗</a></div>
+        <h3>"Explain it like I'm 5"</h3>
+      </article>
+      <article class="reel">
+        <i class="pin"></i>
+        <div class="frame">
+          <button class="player" type="button" aria-label="Play Life before ChatGPT with sound">
+            <video src="/ugc/hedwig-before-chatgpt.mp4" poster="/ugc/hedwig-before-chatgpt.jpg" muted loop playsinline preload="none"></video>
+            <span class="hint">▶ Play</span>
+          </button>
+          <button class="restart" type="button" aria-label="Restart Life before ChatGPT from the beginning" title="Restart"><svg class="i" viewBox="0 0 24 24"><path d="M3 12a9 9 0 1 0 3-6.7"/><path d="M3 4v5h5"/></svg></button>
+        </div>
+        <div class="tag"><span>Meme · 9s</span><a href="https://www.instagram.com/p/DeSUXOhvLQ3/" target="_blank" rel="noopener">Hedwig AI ↗</a></div>
+        <h3>Life before ChatGPT</h3>
+      </article>
   </section>
-
-  <h2 class="label">What you get<small>Ready to run as an ad or post organically</small></h2>
-
-  <div class="notes">
-    <div class="note"><i class="pin"></i><h3>Hook-first</h3>Every video opens on a hook, and I can deliver alternate hooks to test against each other.</div>
-    <div class="note"><i class="pin"></i><h3>Demos &amp; reviews</h3>Walkthroughs, skits and honest first impressions, filmed in a real setting.</div>
-    <div class="note"><i class="pin"></i><h3>Raw footage</h3>Clean b-roll and unedited takes on request, so your team can recut for any placement.</div>
-    <div class="note"><i class="pin"></i><h3>Fast turnaround</h3>First draft within hours, a day at most, with a round of revisions included.</div>
-  </div>
 </main>
-
-<footer><a href="/">← back to the board</a></footer>
 
 <script>
   // Reels play muted while on screen, like a feed. Tapping one turns its sound on from
